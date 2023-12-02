@@ -1,0 +1,65 @@
+
+	
+	<!--end switcher-->
+	<!-- Bootstrap JS -->
+	<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+	<!--plugins-->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!--app JS-->
+	<!--<script src="/assets/js/app.js"></script>-->
+	<!--Password show & hide js -->
+	<script src="/assets/js/showAndHidePassword.js"></script>	
+	<script src="/assets/js/toastr.min.js"></script>
+
+	<script>
+		function showToastr(message){ 
+			toastr.options.closeButton = true;
+			toastr.options.timeOut = 5000;
+			toastr.options.extendedTimeOut = 2000;
+			toastr.options.progressBar = true;
+			//toastr.options.rtl = true;
+			toastr.options.preventDuplicates= true; 
+
+			let timeOutError = 8000 ;
+			let timeOutMessage = 2000;
+			let prop = 'success';
+
+			// if(Array.isArray(errorMessages) && (errorMessages.length>0)){
+			// 	for (i in errorMessages.reverse()) {
+			// 		toastr.options.timeOut = timeOutError;	
+			// 		prop = 'error'
+			// 		toastr[prop](message[i].replaceAll('/n', '<br/>'));					
+			// 	}
+			// }
+
+			for(const prop in message){ 
+				if(prop === 'success' || prop === 'error' || prop === 'info' ||prop === 'warning' ){
+					let length = (message[prop].reverse()).length;
+					for(let i = 0; i < length; i++){
+						toastr.options.timeOut = timeOutMessage;	
+						toastr[prop](message[prop][i].replaceAll('/n', '<br/>'));
+					}					
+				}
+			}			
+		}  
+	</script>
+	<% if( (typeof errorMessages !== "undefined") && Array.isArray(errorMessages) ) {%>	
+		<script>
+			let errMsg = {error: JSON.parse('<%- JSON.stringify(errorMessages) %>') }; //convert array -> objOfArray
+			showToastr(errMsg);  
+		</script>
+	<% } %>
+	<% if( (typeof messages !== "undefined") && messages ) {%>	
+    <script> 
+		let parsedMessages = JSON.parse('<%- JSON.stringify(messages) %>') ;
+		showToastr(parsedMessages); 
+    </script>
+    <% } %>
+
+</body>
+
+</html>

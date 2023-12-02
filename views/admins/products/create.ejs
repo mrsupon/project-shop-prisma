@@ -1,0 +1,57 @@
+<%- include('../../layouts/head.ejs') %>
+
+</head>
+
+<body>
+    <%- include('../../layouts/navigation.ejs') %>
+    
+  <div class="container col-sm-12 col-md-6 ">
+    <div class="card border-0  mt-2">
+        <div class="card-body">
+            <div class="border p-4 rounded">
+                <div class="card-title d-flex align-items-center">
+                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+                    </div>
+                    <h5 class="mb-0 text-primary">Add Product</h5>
+                </div>
+                <hr>
+                <form  action="/admins/products" method="POST" enctype="multipart/form-data">
+                    <% errorFields=(!messages.errorFields)?[]:messages.errorFields; %>
+                    <div class="row mb-3">
+                        <label for="title" class="col-sm-3 col-form-label">Enter Title</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control <%= errorFields.includes('title')?'border-danger':'' %>" id="title" name="title" value="<%= old.title %>" placeholder="Enter Title" >
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="description" class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control <%= errorFields.includes('description')?'border-danger':'' %>" id="description" name="description" rows="3" placeholder="Description"><%= old.description %></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="price" class="col-sm-3 col-form-label">Price</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control <%= errorFields.includes('price')?'border-danger':'' %>" id="price" name="price" value="<%= old.price %>" placeholder="Price"  step="0.01">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="image" class="col-sm-3 col-form-label">Image URL</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control " id="image" name="image"  placeholder="Image" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-sm-3 "></span>
+                        <div class="col-sm-9 card-actions btn-group border-0 bg-white px-2 d-inline-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary mx-1">Send</button>
+                            <button type="button" class="btn btn-primary mx-1" onclick="javascript:history.back()">Cancle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<%- include('../../layouts/end.ejs') %>
