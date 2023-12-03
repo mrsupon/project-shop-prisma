@@ -18,13 +18,17 @@ app.use((err, req, res, next) => {
   res.status(500).redirect('/500');
 });
 
-DbMongoose.connect()
-  .then((result) => {
-    app.listen(port, () => {
-      console.log(`Successfully started server on port ${port}.`);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-    res.redirect('/500');
-  });
+app.listen(port, () => {
+  console.log(`Successfully started server on port ${port}.`);
+});
+
+// DbMongoose.connect()
+//   .then((result) => {
+//     app.listen(port, () => {
+//       console.log(`Successfully started server on port ${port}.`);
+//     });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//     res.redirect('/500');
+//   });
