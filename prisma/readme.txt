@@ -34,3 +34,7 @@ Add to existing project
         npx prisma db pull --schema=./prismaSqlite/schema.prisma
         npx prisma migrate diff --from-empty --to-schema-datamodel prismaSqlite/schema.prisma --script > prismaSqlite/migrations/0_init/migration.sql
         npx prisma generate --schema=./prismaSqlite/schema.prisma
+
+
+
+
