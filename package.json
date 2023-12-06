@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production node server",
     "start-server": "node server.js",
     "start:dev": "nodemon server.js",
-    "postinstall": "npx prisma generate && npx prisma generate --schema=./prismaSqlite/schema.prisma "
+    "postinstall": "npx prisma generate --schema=./databases/prisma/schema.prisma && npx prisma generate --schema=./databases/prismaSqlite/schema.prisma "
   },
   "author": "",
   "license": "ISC",
