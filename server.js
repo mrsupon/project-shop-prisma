@@ -1,34 +1,32 @@
 import express from 'express';
-import Route from './routes/web.js';
+import WebRouter from './routes/web.js';
 import MiddlewareRegister from './middlewares/middlewareRegister.js';
-import AuthMiddleware from './middlewares/authMiddleware.js';
-import DbMongoose from './database/dbMongoose.js';
+import DbMongoose from './databases/dbMongoose.js';
 import Utility from './utils/utility.js';
 import morgan from 'morgan';
 
-const app = express();
-const port = 3000;
+class App {
+  static start() {
+    const app = express();
+    const port = 3000;
 
-MiddlewareRegister.init(app);
-Route.init(app);
-app.use((err, req, res, next) => {
-  console.log(err);
-  // AuthMiddleware.clearAuth();
-  //Utility.resetSession(req, res);
-  res.status(500).redirect('/500');
-});
+    MiddlewareRegister.init(app);
+    WebRouter.init(app);
 
-app.listen(port, () => {
-  console.log(`Successfully started server on port ${port}.`);
-});
+    app.use(App.handleError);
 
-// DbMongoose.connect()
-//   .then((result) => {
-//     app.listen(port, () => {
-//       console.log(`Successfully started server on port ${port}.`);
-//     });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//     res.redirect('/500');
-//   });
+    app.listen(port, () => {
+      console.log(`Successfully started server on port ${port}.`);
+    });
+  }
+  static handleError(err, req, res, next) {
+    res.status(err.status || 500).render('error.ejs', {
+      auth: req.session.auth,
+      pageTitle: err.status,
+      path: '/error',
+      errorMessages: req.app.get('env') === 'development' ? err : { message: err.message },
+    });
+  }
+}
+
+App.start();

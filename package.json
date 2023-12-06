@@ -6,20 +6,19 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server",
+    "start": "NODE_ENV=production node server",
     "start-server": "node server.js",
+    "start:dev": "nodemon server.js",
     "postinstall": "npx prisma generate && npx prisma generate --schema=./prismaSqlite/schema.prisma "
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "daisyui": "^3.9.1",
-    "nodemon": "^1.18.3"
+    "nodemon": "^3.0.2"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
     "@quixo3/prisma-session-store": "^3.1.13",
-    "ajv": "^8.12.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
@@ -29,8 +28,8 @@
     "express": "^4.16.3",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
+    "http-errors": "^2.0.0",
     "isomorphic-dompurify": "^1.9.0",
-    "lodash": "^4.17.21",
     "method-override": "^3.0.0",
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.0",
@@ -38,12 +37,11 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.1",
     "nodemailer": "^6.9.6",
-    "old-input": "^1.1.0",
     "pdfkit": "^0.13.0",
     "prisma": "^5.6.0",
     "prompt-sync-plus": "^1.0.2",
     "sequelize": "^6.33.0",
-    "sqlite3": "^5.1.6",
-    "zod": "^3.22.4"
-  }
+    "sqlite3": "^5.1.6"
+  },
+  "engines": {"node":"20.10.0"} 
 }

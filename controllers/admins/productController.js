@@ -1,9 +1,7 @@
 import Product from '../../models/mongoose/product.js';
-import z from 'zod';
 import Utility from '../../utils/utility.js';
 import Pagination from '../../utils/pagination.js';
-import prisma from '../../database/prisma/dbPrismaMysql.js';
-import AuthMiddleware from '../../middlewares/authMiddleware.js';
+import prisma from '../../databases/prisma/dbPrismaMysql.js';
 
 class ProductController {
   static index(req, res) {
@@ -56,36 +54,7 @@ class ProductController {
     data.userId = req.session.auth.id;
     data.createdAt = new Date().toISOString();
     data.updatedAt = new Date().toISOString();
-    // Zod Input Validation//////////
-    // const schema = z.object({
-    //   data: z.object({
-    //     title: z
-    //       .string({
-    //         required_error: 'Title is required',
-    //         invalid_type_error: 'Title must be a string',
-    //       })
-    //       .min(5, 'Title should be /n at least 5 character(s)')
-    //       .max(256, 'Title should be /n at most 256 character(s)'), //.regex(new RegExp('^[a-zA-Z0-9]*$'), 'Title should be /n alphanumeric'),
-    //     imageUrl: z.string({
-    //       required_error: 'ImageUrl is required',
-    //       invalid_type_error: 'ImageUrl must be string',
-    //     }), //.url('ImageUrl should be /n URL format'),//.regex(new RegExp('/^\w+$/'),'Password should be /n an alphanumeric' ),//.regex(new RegExp('(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'), 'Password should be /n contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters'),
-    //     price: z.coerce
-    //       .number({
-    //         required_error: 'Price is required',
-    //         invalid_type_error: 'Price must be a number',
-    //       })
-    //       .positive('Price should be /n positive number'),
-    //     description: z.string().optional(),
-    //   }),
-    // });
-    // const validateResult = Utility.validate(schema, data);
-    // if (validateResult !== null) {
-    //   req.flash('error', validateResult.errorMessages);
-    //   req.flash('errorFields', validateResult.errorFields);
-    //   return res.status(422).redirect('/admins/products/create');
-    // }
-    //////////////////////////////////
+
     prisma.products
       .create({
         data: data,
@@ -134,7 +103,6 @@ class ProductController {
         product.description = req.body.description.trim();
         product.price = parseFloat(req.body.price);
 
-        // Zod Input Validation//////////
         const schema = z.object({
           data: z.object({
             title: z

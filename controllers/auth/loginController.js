@@ -1,10 +1,5 @@
-import User from '../../models/mongoose/user.js';
 import bcrypt from 'bcryptjs';
-import OldInputMiddleware from '../../middlewares/oldInputMiddleware.js';
-import ValidatorMiddleware from '../../middlewares/validatorMiddleware.js';
-import AuthMiddleware from '../../middlewares/authMiddleware.js';
-import prisma from '../../database/prisma/dbPrismaMysql.js';
-import Utility from '../../utils/utility.js';
+import prisma from '../../databases/prisma/dbPrismaMysql.js';
 
 class LoginController {
   static index(req, res) {}
@@ -72,8 +67,10 @@ class LoginController {
   static update(req, res) {}
 
   static destroy(req, res) {
-    req.session.destroy();
-    res.redirect('/');
+    req.session.destroy(function (err) {
+      if (err) throw err;
+      else res.redirect('/'); // redirect session don't auto save && save have to use callback
+    });
     //Utility.resetSession(req, res);
     //AuthMiddleware.clearAuth();
   }

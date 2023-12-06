@@ -1,6 +1,6 @@
 import fs from 'fs';
 import Utility from '../utils/utility.js';
-import db from '../database/dbMysql.js';
+import db from '../databases/dbMysql.js';
 
 class Product {
   static data = this.find();
@@ -32,7 +32,7 @@ class Product {
   }
 
   static update() {
-    fs.writeFile(new URL('../database/products.json', import.meta.url), JSON.stringify(Product.data), (error) => {
+    fs.writeFile(new URL('../databases/products.json', import.meta.url), JSON.stringify(Product.data), (error) => {
       if (!error) console.log('Save File Sucessfully.');
       else console.log(error);
     });

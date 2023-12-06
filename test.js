@@ -1,6 +1,6 @@
 //import { PrismaClient } from '@prisma/client';
 //import { Prisma, PrismaClient } from '@internal/prismaSqlite/client/index.js';
-import prismaSqlite from './database/prisma/dbPrismaSqlite.js';
+import prismaSqlite from './databases/prisma/dbPrismaSqlite.js';
 import Utility from './utils/utility.js';
 import msg from './utils/message.js';
 

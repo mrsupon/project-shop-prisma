@@ -1,5 +1,5 @@
 import { validationResult, checkSchema, body, check } from 'express-validator';
-import prisma from '../database/prisma/dbPrismaMysql.js';
+import prisma from '../databases/prisma/dbPrismaMysql.js';
 
 class ValidatorMiddleware {
   //static errors = null;

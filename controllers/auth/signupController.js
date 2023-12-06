@@ -1,9 +1,7 @@
 import User from '../../models/mongoose/user.js';
 import EMail from '../../utils/email.js';
 import bcrypt from 'bcryptjs';
-import ValidatorMiddleware from '../../middlewares/validatorMiddleware.js';
-import prisma from '../../database/prisma/dbPrismaMysql.js';
-import oldInput from 'old-input';
+import prisma from '../../databases/prisma/dbPrismaMysql.js';
 import Utility from '../../utils/utility.js';
 
 class SignupController {

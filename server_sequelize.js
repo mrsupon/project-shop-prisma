@@ -5,7 +5,7 @@ import methodOverride from 'method-override';
 
 import Route from './routes/web.js';
 import DbRelationship from './models/sequelize/dbRelationship.js';
-import db from './database/dbSequelize.js';
+import db from './databases/dbSequelize.js';
 import User from './models/sequelize/user.js';
 
 const app = express();

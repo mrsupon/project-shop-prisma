@@ -1,5 +1,5 @@
 import sequelize from 'sequelize';
-import db from '../../database/dbSequelize.js';
+import db from '../../databases/dbSequelize.js';
 
 const Cart = db.define(
   'cart',

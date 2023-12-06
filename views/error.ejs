@@ -1,0 +1,10 @@
+<%- include('./layouts/head.ejs') %>
+</head>
+
+<body>
+    <%- include('./layouts/navigation.ejs') %>
+    <h1><%= errorMessages.message %></h1>
+    <h2><%= errorMessages.status %></h2>
+    <pre><%= errorMessages.stack %></pre>
+
+<%- include('./layouts/end.ejs') %>  

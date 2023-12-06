@@ -13,6 +13,13 @@ class ErrorController {
       path: '/500',
     });
   }
+  static showError(req, res) {
+    res.status(500).render('500.ejs', {
+      auth: req.session.auth,
+      pageTitle: '500',
+      path: '/500',
+    });
+  }
 }
 
 export default ErrorController;

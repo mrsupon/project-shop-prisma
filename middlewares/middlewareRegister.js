@@ -6,11 +6,9 @@ import session from 'express-session';
 //import { default as connectMongodbSession } from 'connect-mongodb-session';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 //import { PrismaClient } from '@prisma/client';
-import prismaSqlite from '../database/prisma/dbPrismaSqlite.js';
+import prismaSqlite from '../databases/prismaSqlite/dbPrismaSqlite.js';
 
-import DbMongoose from '../database/dbMongoose.js';
-import AuthMiddleware from './authMiddleware.js';
-import OldInputMiddleware from './oldInputMiddleware.js';
+import DbMongoose from '../databases/dbMongoose.js';
 import SanitizerMiddleware from './sanitizerMiddleware.js';
 //import flash from 'connect-flash';
 import multer from 'multer';

@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@internal/prismaSqlite/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_SQLITE_URL")
+}
+
+model session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}

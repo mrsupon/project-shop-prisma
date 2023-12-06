@@ -1,25 +1,23 @@
-import ErrorController from '../controllers/errorController.js';
+import createError from 'http-errors';
 import ShopController from '../controllers/shops/shopController.js';
-import AuthRoute from './authRoute.js';
-import AdminRoute from './adminRoute.js';
-import ShopRoute from './shopRoute.js';
-import AuthMiddleware from '../middlewares/authMiddleware.js';
-import route from '../utils/route.js';
+import AuthRouter from './web/auth.js';
+import AdminRouter from './web/admin.js';
+import ShopRouter from './web/shop.js';
 
-class Route {
+class Web {
   static init(app) {
-    app.use('/auth', AuthRoute);
-    app.use('/admins', AdminRoute);
-    app.use('/shops', ShopRoute);
-
     app.get('/', ShopController.index);
-    app.get('/500', ErrorController.show500);
-    app.all('*', ErrorController.show404);
+    app.use('/auth', AuthRouter);
+    app.use('/admins', AdminRouter);
+    app.use('/shops', ShopRouter);
 
-    route.home = '/';
-    route.login = '/auth/login/create';
-    route.dashboard = '/dashboard';
+    // catch 404 and forward to error handler
+    app.use('/*', function (req, res, next) {
+      //next(createError(404));  //(new createError.NotFound('Page not found.'))
+      next(createError.NotFound());
+      //next();
+    });
   }
 }
 
-export default Route;
+export default Web;

@@ -1,4 +1,4 @@
-import prisma from '../database/prisma/dbPrismaMysql.js';
+import prisma from '../databases/prisma/dbPrismaMysql.js';
 
 class Pagination {
   constructor(itemsPerPage = 3, totalItems = 0, currentPage = 1) {

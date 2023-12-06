@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model cartitems {
+  id        Int      @id @default(autoincrement())
+  quantity  Int?
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+  cartId    Int?
+  productId Int?
+
+  @@unique([cartId, productId], map: "cartItems_productId_cartId_unique")
+  @@index([productId], map: "productId")
+}
+
+model carts {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+  userId    Int?
+
+  @@index([userId], map: "userId")
+}
+
+model orderdetails {
+  id        Int      @id @default(autoincrement())
+  quantity  Int?
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+  orderId   Int?
+  productId Int?
+
+  @@unique([orderId, productId], map: "orderDetails_productId_orderId_unique")
+  @@index([productId], map: "productId")
+}
+
+model orders {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+  userId    Int?
+
+  @@index([userId], map: "userId")
+}
+
+model products {
+  id          Int      @id @default(autoincrement())
+  title       String?  @db.VarChar(255)
+  price       Float?   @db.Float
+  imageUrl    String?  @db.VarChar(255)
+  description String?  @db.VarChar(255)
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
+  userId      Int?
+
+  @@index([userId], map: "userId")
+}
+
+model users {
+  id                   Int       @id @default(autoincrement())
+  name                 String?   @db.VarChar(255)
+  email                String    @unique(map: "users_email_unique") @db.VarChar(255)
+  password             String?   @db.VarChar(255)
+  resetToken           String?   @db.VarChar(255)
+  resetTokenExpiration DateTime? @db.DateTime(0)
+  createdAt            DateTime? @db.DateTime(0)
+  updatedAt            DateTime? @db.DateTime(0)
+}
